@@ -1,4 +1,5 @@
 import { Component, Dispatch, FormEvent, SetStateAction } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Botao from '../Botao';
 import { ITarefa } from '../types/ITarefa';
@@ -14,7 +15,19 @@ class Formulario extends Component<{
 
 	adicionarTarefa(evento: FormEvent<HTMLFormElement>) {
 		evento.preventDefault();
-		this.props.setTarefas(tarefasAntigas => [...tarefasAntigas, { ...this.state }]);
+
+		this.props.setTarefas(tarefasAntigas =>
+			[
+				...tarefasAntigas,
+				{
+					...this.state,
+					selecionado: false,
+					completado: false,
+					id: uuidv4(),
+				},
+			]
+		);
+
 		this.setState({
 			tarefa: '',
 			tempo: '00:00'
