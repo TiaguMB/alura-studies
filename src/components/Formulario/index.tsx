@@ -9,12 +9,16 @@ class Formulario extends Component<{
 }> {
 	state = {
 		tarefa: '',
-		tempo: ''
+		tempo: '00:00'
 	};
 
 	adicionarTarefa(evento: FormEvent<HTMLFormElement>) {
 		evento.preventDefault();
 		this.props.setTarefas(tarefasAntigas => [...tarefasAntigas, { ...this.state }]);
+		this.setState({
+			tarefa: '',
+			tempo: '00:00'
+		});
 	}
 
 	render() {
