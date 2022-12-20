@@ -12,6 +12,10 @@ function App() {
 
 	function selecionaTarefa(tarefaSelecionada: ITarefa) {
 		setSelecionado(tarefaSelecionada);
+		setTarefas(tarefasAntigas => tarefasAntigas.map(tarefa => ({
+			...tarefa,
+			selecionado: tarefa.id === tarefaSelecionada.id
+		})));
 	}
 
 	return (
