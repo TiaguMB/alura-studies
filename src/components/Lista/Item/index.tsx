@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import { ITarefa } from '../../types/ITarefa';
 import style from './Item.module.scss';
 
@@ -17,7 +19,11 @@ export default function Item(
 ) {
 	return (
 		<li
-			className={ `${style.item} ${selecionado ? style.itemSelecionado : ''}` }
+			className={classNames(
+				style.item,
+				{ [style.itemSelecionado]: selecionado },
+				{ [style.itemCompletado]: completado },
+			)}
 			onClick={() => selecionaTarefa({
 				tarefa,
 				tempo,
