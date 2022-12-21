@@ -10,10 +10,8 @@ interface Props {
 }
 
 export default function Formulario({ setTarefas }: Props) {
-	const [ state, setState ] = useState({
-		tarefa: '',
-		tempo: '00:00'
-	});
+	const [ tarefa, setTarefa ] = useState('');
+	const [ tempo, setTempo ] = useState('00:00');
 
 	function adicionarTarefa(evento: FormEvent<HTMLFormElement>) {
 		evento.preventDefault();
@@ -22,7 +20,8 @@ export default function Formulario({ setTarefas }: Props) {
 			[
 				...tarefasAntigas,
 				{
-					...state,
+					tarefa,
+					tempo,
 					selecionado: false,
 					completado: false,
 					id: uuidv4(),
@@ -30,10 +29,8 @@ export default function Formulario({ setTarefas }: Props) {
 			]
 		);
 
-		setState({
-			tarefa: '',
-			tempo: '00:00'
-		});
+		setTarefa('');
+		setTempo('00:00');
 	}
 
 	return (
@@ -43,8 +40,8 @@ export default function Formulario({ setTarefas }: Props) {
 				<input
 					type="text"
 					name="tarefa"
-					value={ state.tarefa }
-					onChange={ evento => setState({...state, tarefa: evento.target.value }) }
+					value={ tarefa }
+					onChange={ evento => setTarefa(evento.target.value) }
 					id="tarefa"
 					placeholder="O que você quer estudar?"
 					required
@@ -56,8 +53,8 @@ export default function Formulario({ setTarefas }: Props) {
 					type="time"
 					step="1"
 					name="tempo"
-					value={ state.tempo }
-					onChange={ evento => setState({...state, tempo: evento.target.value }) }
+					value={ tempo }
+					onChange={ evento => setTempo(evento.target.value) }
 					id="tempo"
 					min="00:00:00"
 					max="01:30:00"
