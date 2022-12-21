@@ -11,6 +11,8 @@ function App() {
 	const [ selecionado, setSelecionado ] = useState<ITarefa>();
 
 	function selecionaTarefa(tarefaSelecionada: ITarefa) {
+		if (tarefaSelecionada.completado) return;
+
 		setSelecionado(tarefaSelecionada);
 		setTarefas(tarefasAntigas => tarefasAntigas.map(tarefa => ({
 			...tarefa,
